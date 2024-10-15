@@ -38,22 +38,6 @@ public class LstMovies extends AppCompatActivity
 
     }
     @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_opcion1:
-                // Manejar clic en Opción 1
-                return true;
-            case R.id.action_opcion2:
-                // Manejar clic en Opción 2
-                return true;
-            // ... otros casos según sea necesario
-            default:
-                throw new IllegalStateException("Unexpected value: " + item.getItemId());
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,6 +66,16 @@ public class LstMovies extends AppCompatActivity
 
     @Override
     public void failureMovies(String err) {
+
+    }
+
+    @Override
+    public void showUpdateSuccess() {
+
+    }
+
+    @Override
+    public void showUpdateFailure(String err) {
 
     }
 }

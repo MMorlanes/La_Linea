@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    public static final String URL ="http://192.168.43.180:8080/untitled_war_exploded/";
+    public static final String URL ="postgres.ckp1nbi0hk9f.us-east-1.rds.amazonaws.com";
       @Headers({
               "Accept: application/json",
               "Content-Type: application/json"
@@ -32,7 +32,8 @@ public interface ApiService {
         Call<DataMovies> getDataMovies(@Query("ACTION") String action);
 
         @GET("MyServlet")
-        Call<DataMovies> getDataMovies2(@Query("ACTION") String action);
+        Call<Void> updateMovieTitle(@Query("ACTION") String action, @Query("MOVIE_ID") int movieId, @Query("NEW_TITLE") String newTitle);
+
 
         /*
         @GET("MyServlet")

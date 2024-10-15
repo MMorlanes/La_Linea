@@ -30,4 +30,19 @@ public class LstMoviesPresenter implements ContractListMovies.Presenter,
     public void onFailure(String err) {
 
     }
+
+    public void updateMovieTitle(int movieId, String newTitle) {
+        lstMoviesModel.updateMovieTitle(movieId, newTitle, new ContractListMovies.Model.OnUpdateMovieListener() {
+            @Override
+            public void onUpdateSuccess() {
+                vista.showUpdateSuccess();
+            }
+
+            @Override
+            public void onFailure(String err) {
+                vista.showUpdateFailure(err);
+            }
+        });
+    }
+
 }

@@ -44,5 +44,27 @@ public class LstMoviesModel implements ContractListMovies.Model {
             }
         });
     }
+
+    public void updateMovieTitle(int movieId, String newTitle, OnUpdateMovieListener listener) {
+        ApiService apiService = RetrofitCliente.getClient(ApiService.URL).create(ApiService.class);
+        Call<Void> call = apiService.updateMovieTitle("MOVIE.UPDATE_TITLE", movieId, newTitle);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    listener.onUpdateSuccess();
+                } else {
+                    listener.onFailure("Error updating movie title");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                listener.onFailure(t.getMessage());
+            }
+        });
+    }
+
 }
 
