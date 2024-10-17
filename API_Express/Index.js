@@ -95,6 +95,30 @@ app.get('/peliculas', async (req, res) => {
   });
   
 
+  // Ruta para actualizar el nombre de una película
+app.put('/peliculas/:id', async (req, res) => {
+  const { id } = req.params;
+  const { nuevoTitulo } = req.body;
+
+  try {
+    // Verificar si la película existe
+    const peliculaExistente = await myPool.query('SELECT * FROM Peliculas WHERE id_pelicula = $1', [id]);
+
+    if (peliculaExistente.rows.length === 0) {
+      return res.status(404).json({ message: 'La película no fue encontrada' });
+    }
+
+    // Actualizar el título de la película
+    await myPool.query('UPDATE Peliculas SET titulo = $1 WHERE id_pelicula = $2', [nuevoTitulo, id]);
+    
+    console.log(`Película con id ${id} actualizada con éxito`);
+    res.status(200).json({ message: 'Película actualizada exitosamente' });
+  } catch (error) {
+    console.error('Error al actualizar la película:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
 
 
 
